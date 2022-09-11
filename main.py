@@ -3,6 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
+# Constantes
 ESTILO_INPUT = "background-color: #fff; color: #000; border: none; border-radius: 5px; padding: 7px;"
 ESTILO_BOTAO = "border: none; background-color: #9ecfc2; color: #333; font-size: 13px; font-family: Arial; border-radius: 4px; padding: 10px;"
 ESTILO_BOTAO_SAIR = "border: none; background-color: #b22222; color: #fff; font-size: 12px; font-family: Arial; border-radius: 4px; padding: 10px;"
@@ -11,14 +12,16 @@ ESTILO_TEXTO = "font-size: 15px; font-family: Arial; color: #fff;"
 ESTILO_LISTA = "font-size: 15px; font-family: Arial; color: #fff; border: none; background-color: #252525; border-radius: 5px; padding: 7px;"
 BACKGROUND = "background-color: #2b2b2b;"
 
+# Variáveis globais para serem usadas em qualquer função
 num_votos = 0
 participantes = []
 votos = {}
 votos["branco"] = 0
 contagem = 1
 
+# janela de erro (widget) - usada na janela de configuração
 
-# janela de erro (widget)
+
 def widget_erro(titulo, mensagem):
     mensagem_erro = QMessageBox()
 
@@ -123,24 +126,34 @@ class Configuracao(QWidget):
     def salvar_numero_de_votos(self):
         global num_votos, votos
 
+        # verifica se o número de votos é do tipo dígito (número), se o input de candidatos está vazio e se o número de candidatos é maior que 1
         if self.input_num_votos.text().isdigit() and self.input_candidatos.text() != "" and len(self.input_candidatos.text().split(",")) > 1:
+            # se as condições acima forem verdadeiras, o número de votos é salvo na variável global num_votos e os nomes são salvos na variável global participantes
             num_votos = int(self.input_num_votos.text())
             self.salvar_nomes()
             self.nova_janela()
+            # se não:
         else:
+            # se o input de candidatos estiver vazio, exibe uma mensagem de erro
             if self.input_candidatos.text() == "":
                 widget_erro("Erro - candidatos",
                             "Por favor, informe os candidatos!")
-            elif self.input_num_votos.text().isdigit() == False:
+
+            # se o número de candidatos não for um dígito, exibe uma mensagem de erro
+            elif not self.input_num_votos.text().isdigit():
                 widget_erro("Erro - número de votos",
                             "Por favor, informe um número válido!")
+
+            # se o número de candidatos for menor que 2, exibe uma mensagem de erro
             else:
                 widget_erro("Erro - número de candidatos",
                             "Por favor, informe mais de um candidato!")
 
     def salvar_nomes(self):
+        # salva os nomes dos candidatos na variável global participantes, separando-os por vírgula
         participantes = self.input_candidatos.text().split(",")
         for participante in participantes:
+            # adiciona o nome do participante na lista de votos com o valor 0
             votos[participante] = 0
 
     def nova_janela(self):
@@ -225,8 +238,11 @@ class Votacao(QWidget):
     def contar_numero_de_votos(self):
         global contagem
         contagem += 1
+
+        # a cada voto, atualiza o texto do número de votos
         self.texto_num_voto.setText(f"Voto número: {contagem}")
 
+        # se a contagem for igual ao número de votos, encerra a votação
         if contagem == (num_votos + 1):
             self.botao_votar.setVisible(False)
             self.texto_num_voto.setVisible(False)
@@ -235,10 +251,14 @@ class Votacao(QWidget):
             self.mensagem.setText("Votação encerrada!")
 
     def adicionar_voto(self):
+        # o voto é o nome do candidato digitado no input em letras minúsculas
         voto = self.input_voto.text().lower()
 
+        # se o voto for um nome de candidato, adiciona 1 à chave referente ao candidato
         if voto in votos:
             votos[voto] += 1
+
+        # se o voto não for nenhum candidato, adiciona 1 à chave branco do dicionário votos
         else:
             votos["branco"] += 1
 
@@ -309,16 +329,22 @@ class Resultado(QWidget):
         duplicados = {}
         empate = False
 
+        # array que percorre os itens(candidato e voto) do dict votos
         for candidato, voto in votos.items():
             if candidato != "branco":
+                # "função" que adiciona os candidatos que tiveram o mesmo número de votos
                 duplicados.setdefault(voto, set()).add(candidato)
 
+            # se o dicionario for maior que 1, significa que houve empate entre os candidatos
             if duplicados != {}:
                 if len(duplicados[max(duplicados)]) > 1 and candidato != "branco":
                     empate = True
 
+            # caso o voto sendo percorrido seja o maior valor do dicionário e o candidato diferente de branco, o candidato é o vencedor
             if voto == max(votos.values()) and candidato != "branco":
                 vencedor = candidato
+
+            # caso o voto sendo percorrido seja o maior valor do dicionário e o candidato for branco, o "vencedor" é branco
             elif voto == sorted(votos.values(), reverse=True)[1] and candidato == "branco":
                 vencedor = candidato
 
@@ -338,6 +364,7 @@ class Resultado(QWidget):
         resposta = msg.exec_()
 
         if resposta == QMessageBox.Yes:
+            # reinicia todas as variáveis
             num_votos = 0
             participantes = []
             votos = {"branco": 0}
@@ -397,12 +424,12 @@ class ResultadoDetalhado(QWidget):
         percentual = {}
         resultado = ""
 
+
         for nome, quantidade_voto in votos.items():
-            percentual[nome] = round((quantidade_voto / num_votos) * 100, 2)
+            # calcula o percentual de cada candidato
+            percentual[nome] = int(round((quantidade_voto / num_votos) * 100, 2))
 
-            if percentual[nome].is_integer():
-                percentual[nome] = int(percentual[nome])
-
+            # condições para formatação do texto a ser exibido na tela
             if nome == 'branco':
                 if quantidade_voto == 1:
                     str_voto_branco = "voto"
