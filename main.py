@@ -254,17 +254,21 @@ class Votacao(QWidget):
         # o voto é o nome do candidato digitado no input em letras minúsculas
         voto = self.input_voto.text().lower()
 
-        # se o voto for um nome de candidato, adiciona 1 à chave referente ao candidato
-        if voto in votos:
-            votos[voto] += 1
+        if voto == "": 
+            widget_erro("Erro", "Preencha o input com algum candidato, ou \"branco\"")
 
-        # se o voto não for nenhum candidato, adiciona 1 à chave branco do dicionário votos
         else:
-            votos["branco"] += 1
+            # se o voto for um nome de candidato, adiciona 1 à chave referente ao candidato
+            if voto in votos:
+                votos[voto] += 1
 
-        self.contar_numero_de_votos()
-        self.input_voto.setText("")
-        self.input_voto.setFocus()
+            # se o voto não for nenhum candidato, adiciona 1 à chave branco do dicionário votos
+            else:
+                votos["branco"] += 1
+
+            self.contar_numero_de_votos()
+            self.input_voto.setText("")
+            self.input_voto.setFocus()
 
     def nova_janela(self):
         self.nova_janela = Resultado()
@@ -286,16 +290,12 @@ class Resultado(QWidget):
         self.imagem.setPixmap(QPixmap("robo.png"))
         self.imagem.setFixedSize(170, 170)
 
-        self.label_resultado = QLabel(
-            f"{self.verificar_resultado()}\nO número de votos foi de {num_votos} votos.", self)
-        self.label_resultado.setStyleSheet(
-            f"{ESTILO_TITULO}; margin-bottom: 10px")
+        self.label_resultado = QLabel(f"{self.verificar_resultado()}\nO número de votos foi de {num_votos} votos.", self)
+        self.label_resultado.setStyleSheet(f"{ESTILO_TITULO}; margin-bottom: 10px")
         self.label_resultado.setAlignment(Qt.AlignCenter)
 
-        self.creditos = QLabel(
-            "Desenvolvido por: Leandro Adrian, João Moreira, Inaiê Moreira e Mariana Almeida", self)
-        self.creditos.setStyleSheet(
-            "font-size: 12px; color: grey; margin-top: 20px")
+        self.creditos = QLabel("Desenvolvido por: Leandro Adrian, João Moreira, Inaiê Moreira e Mariana Almeida", self)
+        self.creditos.setStyleSheet("font-size: 12px; color: grey; margin-top: 20px")
         self.creditos.setAlignment(Qt.AlignCenter)
         self.creditos.setWordWrap(True)
 
@@ -303,8 +303,7 @@ class Resultado(QWidget):
         self.botao_resultado.setStyleSheet(ESTILO_BOTAO_SAIR)
         self.botao_resultado.clicked.connect(self.close)
 
-        self.botao_resultado_detalhado = QPushButton(
-            "Resultado detalhado", self)
+        self.botao_resultado_detalhado = QPushButton("Resultado detalhado", self)
         self.botao_resultado_detalhado.setStyleSheet(ESTILO_BOTAO)
         self.botao_resultado_detalhado.clicked.connect(self.nova_janela)
 
@@ -316,8 +315,7 @@ class Resultado(QWidget):
         self.layout.addWidget(self.imagem, 0, 0, 1, 3, Qt.AlignCenter)
         self.layout.addWidget(self.label_resultado, 1, 0, 1, 3)
         self.layout.addWidget(self.botao_resultado, 2, 0, Qt.AlignLeft)
-        self.layout.addWidget(
-            self.botao_resultado_detalhado, 2, 1, Qt.AlignCenter)
+        self.layout.addWidget(self.botao_resultado_detalhado, 2, 1, Qt.AlignCenter)
         self.layout.addWidget(self.botao_pagina_inicial, 2, 2, Qt.AlignRight)
         self.layout.addWidget(self.creditos, 3, 0, 1, 3)
         self.layout.setAlignment(Qt.AlignCenter)
@@ -328,6 +326,7 @@ class Resultado(QWidget):
     def verificar_resultado(self):
         duplicados = {}
         empate = False
+        vencedor = ''
 
         # array que percorre os itens(candidato e voto) do dict votos
         for candidato, voto in votos.items():
@@ -424,10 +423,10 @@ class ResultadoDetalhado(QWidget):
         percentual = {}
         resultado = ""
 
-
         for nome, quantidade_voto in votos.items():
             # calcula o percentual de cada candidato
-            percentual[nome] = int(round((quantidade_voto / num_votos) * 100, 2))
+            percentual[nome] = int(
+                round((quantidade_voto / num_votos) * 100, 2))
 
             # condições para formatação do texto a ser exibido na tela
             if nome == 'branco':
@@ -435,13 +434,13 @@ class ResultadoDetalhado(QWidget):
                     str_voto_branco = "voto"
                 else:
                     str_voto_branco = "votos"
-                resultado += f"Votos em branco: {quantidade_voto} {str_voto_branco} ({percentual[nome]}%).\n"
+                    resultado += f"Votos em branco: {quantidade_voto} {str_voto_branco} ({percentual[nome]}%).\n"
             else:
                 if quantidade_voto == 1:
                     str_voto = "voto"
                 else:
                     str_voto = "votos"
-                resultado += f"O candidato \"{nome}\" obteve {quantidade_voto} {str_voto}, sendo {percentual[nome]}% do total\n"
+                    resultado += f"O candidato \"{nome}\" obteve {quantidade_voto} {str_voto}, sendo {percentual[nome]}% do total\n"
 
         return resultado
 
