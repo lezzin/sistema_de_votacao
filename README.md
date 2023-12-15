@@ -4,8 +4,6 @@ Eu e mais 3 amigos tivemos a ideia de construí-lo para um trabalho de Linguagen
 
 Resumidamente [PyQt5](https://www.riverbankcomputing.com/static/Docs/PyQt5/) PyQt5 é um kit de ferramentas de interface de usuário de plataforma cruzada, um conjunto de ligações Python para Qt v5. Pode-se desenvolver um aplicativo de desktop interativo com muita facilidade devido às ferramentas e à simplicidade oferecidas por esta biblioteca.
 
-![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=lezzin&repo=sistema_de_votacao&theme=dark)
-
 ## Inicialização:
 Para executar o projeto, você precisa ter o Python e o módulo PyQt5 instalado em seu PC. <br>
 Caso não tenha o Python, siga o passo a passo [para Linux](https://python.org.br/instalacao-linux/) ou [para Windows](https://python.org.br/instalacao-windows/).<br>
