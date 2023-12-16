@@ -54,7 +54,7 @@ Agora está tudo pronto... basta navegar pela aplicação.
 * Python
 * PyQt5
 
-### 🔗 Minhas redes sociais para contato
+## 🔗 Minhas redes sociais para contato
 
 [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/leandroadrian_/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/leandro-adrian)
