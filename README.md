@@ -1,5 +1,7 @@
 ![Foto do projeto](https://github.com/lezzin/sistema_de_votacao/assets/103830032/b79470cf-1cb6-43fd-8bb5-1703b7447d7a)
 
+# Sistema de votação
+
 Eu e mais 3 amigos tivemos a ideia de construí-lo para um trabalho de Linguagens de Programação, no qual deveríamos criar um sistema em que fosse possivel a candidatura de 2 pessoas e a escolha de um deles através de votação.
 
 Resumidamente [PyQt5](https://www.riverbankcomputing.com/static/Docs/PyQt5/) PyQt5 é um kit de ferramentas de interface de usuário de plataforma cruzada, um conjunto de ligações Python para Qt v5. Pode-se desenvolver um aplicativo de desktop interativo com muita facilidade devido às ferramentas e à simplicidade oferecidas por esta biblioteca.
@@ -10,7 +12,8 @@ Resumidamente [PyQt5](https://www.riverbankcomputing.com/static/Docs/PyQt5/) PyQ
 * Votação dos candidatos
 * Visualização do candidat oganhador
 
-## Começando
+## Guia de instalação
+
 Para executar o projeto, você precisa ter o Python e o módulo PyQt5 instalado em seu PC. <br>
 Caso não tenha o Python, siga o passo a passo [para Linux](https://python.org.br/instalacao-linux/) ou [para Windows](https://python.org.br/instalacao-windows/).<br>
 Após o Python estar instalado, instale o PyQt5. Siga o passo-a-passo.
