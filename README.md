@@ -2,15 +2,15 @@
 
 # Sistema de votação
 
-Eu e mais 3 amigos tivemos a ideia de construí-lo para um trabalho de Linguagens de Programação, no qual deveríamos criar um sistema em que fosse possivel a candidatura de 2 pessoas e a escolha de um deles através de votação.
+Eu e mais 3 amigos tivemos a ideia de construí-lo para um trabalho de Linguagens de Programação, no qual deveríamos criar um sistema em que fosse possível a candidatura de 2 pessoas e a escolha de um deles através de votação.
 
-Resumidamente [PyQt5](https://www.riverbankcomputing.com/static/Docs/PyQt5/) PyQt5 é um kit de ferramentas de interface de usuário de plataforma cruzada, um conjunto de ligações Python para Qt v5. Pode-se desenvolver um aplicativo de desktop interativo com muita facilidade devido às ferramentas e à simplicidade oferecidas por esta biblioteca.
+Resumidamente, [PyQt5](https://www.riverbankcomputing.com/static/Docs/PyQt5/) é um kit de ferramentas de interface de usuário de plataforma cruzada, um conjunto de ligações Python para Qt v5. Pode-se desenvolver um aplicativo de desktop interativo com muita facilidade devido às ferramentas e à simplicidade oferecidas por esta biblioteca.
 
 ## Recursos
 
-* Cadastro de candidatos e número de votantes
-* Votação dos candidatos
-* Visualização do candidat oganhador
+- Cadastro de candidatos e número de votantes
+- Votação dos candidatos
+- Visualização do candidato vencedor
 
 ## Guia de instalação
 
@@ -54,7 +54,8 @@ Agora está tudo pronto... basta navegar pela aplicação.
 * Python
 * PyQt5
 
-## Minhas redes sociais para contato
+## Contato
+Você pode me encontrar nas seguintes redes sociais:
 
 [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/leandroadrian_/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/leandro-adrian)
